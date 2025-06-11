@@ -16,15 +16,16 @@
     <style>
         body {
             font-family: 'Poppins', sans-serif;
-            background: #0a0c10; /* Fondo oscuro sólido y profesional */
+            background: #0a0c10;
             color: #c9d1d9;
             overflow: hidden;
         }
 
         .slide {
+            display: none;
             min-height: 100vh;
             width: 100%;
-            display: none; /* Se ocultan por defecto */
+            display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
@@ -35,11 +36,11 @@
             position: absolute;
             top: 0;
             left: 0;
-            transform: translateX(50px) scale(0.98); /* Animación de entrada */
+            transform: translateX(50px) scale(0.98);
         }
 
         .slide.active {
-            display: flex; /* Se muestra la diapositiva activa */
+            display: flex;
             opacity: 1;
             z-index: 10;
             transform: translateX(0) scale(1);
@@ -57,7 +58,7 @@
         }
         
         .glass-card {
-            background: rgba(13, 27, 42, 0.5); /* Color de fondo más oscuro y menos transparente */
+            background: rgba(13, 27, 42, 0.5);
             backdrop-filter: blur(12px);
             border: 1px solid rgba(34, 211, 238, 0.2);
             border-radius: 1rem;
@@ -68,6 +69,10 @@
             transform: translateY(-5px);
             border-color: rgba(34, 211, 238, 0.4);
             box-shadow: 0 10px 30px rgba(34, 211, 238, 0.1);
+        }
+        
+        .interactive-card {
+            cursor: pointer;
         }
 
         .nav-button {
@@ -114,23 +119,12 @@
             color: #22d3ee;
         }
 
-        .pulse-animation {
-            animation: pulse 2.5s infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { opacity: 1; transform: scale(1); }
-            50% { opacity: 0.8; transform: scale(1.02); }
-        }
-
-        .float-animation {
-            animation: float 4s ease-in-out infinite;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-15px); }
-        }
+        /* Animations */
+        @keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.8; transform: scale(1.02); } }
+        .pulse-animation { animation: pulse 2.5s infinite; }
+        @keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-15px); } }
+        .float-animation { animation: float 4s ease-in-out infinite; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
         .highlight-box {
             background: linear-gradient(135deg, rgba(34, 211, 238, 0.1) 0%, rgba(6, 182, 212, 0.05) 100%);
@@ -139,11 +133,59 @@
             padding: 1.5rem;
             margin: 1rem 0;
         }
+        
+        .stat-card {
+            background: rgba(34, 211, 238, 0.05);
+            border: 2px solid rgba(34, 211, 238, 0.2);
+            border-radius: 1rem;
+            padding: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            border-color: rgba(34, 211, 238, 0.5);
+            box-shadow: 0 0 30px rgba(34, 211, 238, 0.15);
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 100;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.6);
+            animation: fadeIn 0.5s;
+        }
+
+        .modal-content {
+            margin: 5% auto;
+            padding: 2.5rem;
+            width: 90%;
+            max-width: 800px;
+            position: relative;
+            text-align: left;
+        }
+
+        .close-btn {
+            color: #aaa;
+            position: absolute;
+            top: 1rem;
+            right: 1.5rem;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+        .close-btn:hover { color: #fff; }
     </style>
 </head>
 <body>
 
-    <!-- Slide 1: Título (Tono colaborativo) -->
+    <!-- Slide 1: Title (Tono colaborativo) -->
     <section id="slide-1" class="slide active">
         <div class="flex flex-col items-center gap-6">
             <div class="float-animation">
@@ -193,28 +235,31 @@
             <p class="text-xl text-gray-400 mb-12">Construyamos juntos un sistema que ilumine, prediga y explique.</p>
             
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="p-8 glass-card flex flex-col items-center gap-6">
+                <div class="p-8 glass-card flex flex-col items-center gap-6 interactive-card hover:scale-105 transition-transform" onclick="showModal('gps')">
                     <div class="w-20 h-20 accent-bg rounded-full flex items-center justify-center">
                         <svg class="w-12 h-12 text-gray-900" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
                     </div>
                     <h3 class="text-3xl font-bold text-white">VISUALIZAR (GPS)</h3>
                     <p class="text-lg text-gray-300 text-center">Mapear los "puntos calientes" de mortalidad.</p>
+                    <span class="text-cyan-400 text-sm mt-2 flex items-center gap-2">Ver detalles <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 5l7 7-7 7M5 5l7 7-7 7"></path></svg></span>
                 </div>
                 
-                <div class="p-8 glass-card flex flex-col items-center gap-6 border-2 border-cyan-400 shadow-2xl shadow-cyan-500/30">
+                <div class="p-8 glass-card flex flex-col items-center gap-6 border-2 border-cyan-400 shadow-2xl shadow-cyan-500/30 interactive-card hover:scale-105 transition-transform" onclick="showModal('oracle')">
                     <div class="w-20 h-20 accent-bg rounded-full flex items-center justify-center pulse-animation">
                        <svg class="w-12 h-12 text-gray-900" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path></svg>
                     </div>
                     <h3 class="text-3xl font-bold text-white">PREDECIR</h3>
                     <p class="text-lg text-gray-300 text-center">Identificar perfiles de alto riesgo con Machine Learning.</p>
+                    <span class="text-cyan-400 text-sm mt-2 flex items-center gap-2">Ver detalles <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 5l7 7-7 7M5 5l7 7-7 7"></path></svg></span>
                 </div>
                 
-                <div class="p-8 glass-card flex flex-col items-center gap-6">
+                <div class="p-8 glass-card flex flex-col items-center gap-6 interactive-card hover:scale-105 transition-transform" onclick="showModal('scalpel')">
                     <div class="w-20 h-20 accent-bg rounded-full flex items-center justify-center">
                         <svg class="w-12 h-12 text-gray-900" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
                     </div>
                     <h3 class="text-3xl font-bold text-white">EXPLICAR (CAJA DE CRISTAL)</h3>
-                    <p class="text-lg text-gray-300 text-center">No solo predecir el 'qué', sino explicar el 'porqué' del riesgo para poder actuar.</p>
+                    <p class="text-lg text-gray-300 text-center">No solo predecir el 'qué', sino explicar el 'porqué' del riesgo.</p>
+                    <span class="text-cyan-400 text-sm mt-2 flex items-center gap-2">Ver detalles <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 5l7 7-7 7M5 5l7 7-7 7"></path></svg></span>
                 </div>
             </div>
         </div>
@@ -227,21 +272,25 @@
             <p class="text-xl text-gray-400 mb-12">Una oportunidad para dominar juntos el ciclo completo de la ciencia de datos.</p>
             
             <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
-                <div class="p-6 glass-card text-center">
+                <div class="p-6 glass-card text-center interactive-card" onclick="showModal('data-eng')">
                     <h4 class="text-xl font-bold text-white mb-2">Data Engineering</h4>
                     <p class="text-cyan-400 text-sm">Pandas, NumPy</p>
+                    <span class="text-cyan-400 text-xs mt-4 inline-block">Ver detalles +</span>
                 </div>
-                <div class="p-6 glass-card text-center border-2 border-cyan-400">
+                <div class="p-6 glass-card text-center border-2 border-cyan-400 interactive-card" onclick="showModal('ml')">
                     <h4 class="text-xl font-bold text-white mb-2">ML Predictivo</h4>
                     <p class="text-cyan-400 text-sm">Scikit-learn, XGBoost</p>
+                    <span class="text-cyan-400 text-xs mt-4 inline-block">Ver detalles +</span>
                 </div>
-                <div class="p-6 glass-card text-center">
+                <div class="p-6 glass-card text-center interactive-card" onclick="showModal('xai')">
                     <h4 class="text-xl font-bold text-white mb-2">Explicabilidad (XAI)</h4>
                     <p class="text-cyan-400 text-sm">SHAP</p>
+                    <span class="text-cyan-400 text-xs mt-4 inline-block">Ver detalles +</span>
                 </div>
-                 <div class="p-6 glass-card text-center">
+                 <div class="p-6 glass-card text-center interactive-card" onclick="showModal('deploy')">
                     <h4 class="text-xl font-bold text-white mb-2">Despliegue</h4>
                     <p class="text-cyan-400 text-sm">Streamlit, Git/GitHub</p>
+                    <span class="text-cyan-400 text-xs mt-4 inline-block">Ver detalles +</span>
                 </div>
             </div>
             
@@ -253,7 +302,7 @@
         </div>
     </section>
 
-    <!-- Slide 5: The Impact (Tono modificado) -->
+    <!-- Slide 5: The Impact -->
     <section id="slide-5" class="slide">
         <div class="w-full max-w-5xl mx-auto">
             <h2 class="text-4xl md:text-5xl font-bold text-white mb-6">Una Historia con Propósito</h2>
@@ -262,47 +311,52 @@
             <div class="p-10 glass-card border-2 border-cyan-400 shadow-2xl shadow-cyan-500/30">
                  <h3 class="text-3xl font-bold text-white mb-4">Nuestro Caso de Estudio</h3>
                  <p class="text-xl text-gray-300 font-light">
-                    Una historia sobre cómo, como equipo, usamos datos masivos no para vender más, sino para abordar un desafío social. Una historia que demuestra un dominio técnico completo, desde los datos crudos hasta una app de IA desplegada. Pienso que esa es una historia que a todos nos enorgullecería contar.
+                      Una historia sobre cómo, como equipo, usamos datos masivos no para vender más, sino para abordar un desafío social. Una historia que demuestra un dominio técnico completo, desde los datos crudos hasta una app de IA desplegada. Pienso que esa es una historia que a todos nos enorgullecería contar.
                  </p>
             </div>
         </div>
     </section>
-
-    <!-- Slide 6: The Plan (Flexibilidad añadida) -->
+    
+    <!-- Slide 6: The Plan -->
     <section id="slide-6" class="slide">
-        <div class="w-full max-w-5xl mx-auto">
+        <div class="w-full max-w-4xl mx-auto">
              <h2 class="text-4xl md:text-5xl font-bold text-white mb-4">Nuestra Hoja de Ruta Propuesta</h2>
-             <p class="text-xl text-gray-400 mb-12">Un plan ambicioso, pero flexible. Nuestra prioridad: un <span class="text-white font-bold">Producto Mínimo Viable (MVP)</span> funcional.</p>
+             <p class="text-xl text-gray-400 mb-12">Un plan ambicioso, pero flexible. Nuestra prioridad: un <strong>Producto Mínimo Viable (MVP)</strong> funcional en 4 semanas.</p>
              
-             <div class="space-y-4">
-                <div class="flex items-center gap-4 p-4 glass-card">
-                    <span class="flex items-center justify-center w-24 h-12 rounded-md accent-bg text-gray-900 font-bold text-xl">Sem 1</span>
-                    <div>
-                        <h4 class="text-xl font-bold text-white">Ingeniería de Datos</h4>
-                        <p class="text-gray-400">Limpieza y categorización de 1.1M de registros.</p>
-                    </div>
+             <!-- 4 Week Interactive Roadmap -->
+             <div class="space-y-4 w-full">
+                <!-- Semana 1 -->
+                <div class="flex items-center gap-4 p-4 glass-card interactive-card" onclick="showModal('semana1')">
+                    <span class="flex-shrink-0 flex items-center justify-center w-24 h-12 rounded-md accent-bg text-gray-900 font-bold text-xl">Sem 1</span>
+                    <div class="text-left"><h4 class="text-xl font-bold text-white">Ingeniería de Datos</h4><p class="text-gray-400">Limpieza y categorización de 1.1M de registros.</p></div>
+                    <span class="ml-auto text-cyan-400 text-2xl">→</span>
                 </div>
-                <div class="flex items-center gap-4 p-4 glass-card">
-                    <span class="flex items-center justify-center w-24 h-12 rounded-md accent-bg text-gray-900 font-bold text-xl">Sem 2</span>
-                    <div>
-                        <h4 class="text-xl font-bold text-white">Análisis Exploratorio (EDA)</h4>
-                        <p class="text-gray-400">Descubrir patrones y crear visualizaciones.</p>
-                    </div>
+                <!-- Semana 2 -->
+                <div class="flex items-center gap-4 p-4 glass-card interactive-card" onclick="showModal('semana2')">
+                     <span class="flex-shrink-0 flex items-center justify-center w-24 h-12 rounded-md accent-bg text-gray-900 font-bold text-xl">Sem 2</span>
+                     <div class="text-left"><h4 class="text-xl font-bold text-white">Análisis Exploratorio (EDA)</h4><p class="text-gray-400">Descubrir patrones y crear visualizaciones.</p></div>
+                     <span class="ml-auto text-cyan-400 text-2xl">→</span>
                 </div>
-                <div class="flex items-center gap-4 p-4 glass-card">
-                    <span class="flex items-center justify-center w-24 h-12 rounded-md accent-bg text-gray-900 font-bold text-xl">Sem 3</span>
-                    <div>
-                        <h4 class="text-xl font-bold text-white">Modelado Predictivo</h4>
-                        <p class="text-gray-400">Entrenar modelo de riesgo con XGBoost y SHAP.</p>
-                    </div>
+                <!-- Semana 3 -->
+                <div class="flex items-center gap-4 p-4 glass-card interactive-card" onclick="showModal('semana3')">
+                    <span class="flex-shrink-0 flex items-center justify-center w-24 h-12 rounded-md accent-bg text-gray-900 font-bold text-xl">Sem 3</span>
+                    <div class="text-left"><h4 class="text-xl font-bold text-white">Modelado Predictivo</h4><p class="text-gray-400">Entrenar modelo de riesgo con XGBoost y SHAP.</p></div>
+                    <span class="ml-auto text-cyan-400 text-2xl">→</span>
                 </div>
-                <div class="flex items-center gap-4 p-4 glass-card">
-                    <span class="flex items-center justify-center w-24 h-12 rounded-md accent-bg text-gray-900 font-bold text-xl">Sem 4</span>
-                    <div>
-                        <h4 class="text-xl font-bold text-white">App y Despliegue</h4>
-                        <p class="text-gray-400">Construir el MVP en Streamlit y preparar la demo.</p>
-                    </div>
+                <!-- Semana 4 -->
+                <div class="flex items-center gap-4 p-4 glass-card interactive-card" onclick="showModal('semana4')">
+                     <span class="flex-shrink-0 flex items-center justify-center w-24 h-12 rounded-md accent-bg text-gray-900 font-bold text-xl">Sem 4</span>
+                     <div class="text-left"><h4 class="text-xl font-bold text-white">App y Despliegue</h4><p class="text-gray-400">Construir el MVP en Streamlit y preparar la demo.</p></div>
+                     <span class="ml-auto text-cyan-400 text-2xl">→</span>
                 </div>
+             </div>
+             
+             <!-- Button for Product Vision -->
+             <div class="mt-12">
+                <button class="accent-bg text-gray-900 font-bold py-3 px-8 rounded-lg hover:scale-105 transition-transform shadow-lg shadow-cyan-500/20 flex items-center justify-center gap-2 mx-auto" onclick="showModal('vision_producto')">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
+                    Visión del Producto y Modelo
+                </button>
              </div>
         </div>
     </section>
@@ -314,11 +368,11 @@
                 Una Misión Conjunta
             </h1>
             <p class="text-2xl md:text-4xl font-light text-gray-300 mb-16">
-               Este es un proyecto ambicioso, y por eso mismo creo que es perfecto para el increíble talento que tenemos en este equipo.
+                Este es un proyecto ambicioso, y por eso mismo creo que es perfecto para el increíble talento que tenemos en este equipo.
             </p>
             <div class="highlight-box max-w-3xl mx-auto">
                  <p class="text-2xl md:text-4xl text-white font-bold">
-                    Me encantaría <span class="accent-text pulse-animation">construir esto con ustedes.</span>
+                      Me encantaría <span class="accent-text pulse-animation">construir esto con ustedes.</span>
                  </p>
             </div>
              <p class="text-lg text-gray-500 mt-16">Mi tesis de grado se centra en este tema. No es una idea improvisada; es un área que me apasiona y en la que me gustaría que colaboremos.</p>
@@ -331,20 +385,22 @@
             <h2 class="text-6xl md:text-8xl font-bold text-white float-animation">¡Gracias!</h2>
             <h3 class="text-4xl md:text-5xl font-light accent-text">SINADEF INSIGHT</h3>
             <p class="text-3xl text-gray-200 mt-8">¿Qué opinan? Me encantaría escuchar sus ideas.</p>
-        </div>
+         </div>
     </section>
 
-    <!-- Navigation Buttons -->
-    <div id="prev-btn" class="nav-button">
-        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
-    </div>
-    <div id="next-btn" class="nav-button">
-        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
-    </div>
 
-    <!-- Slide Counter -->
-    <div class="slide-counter">
-        <span id="current-slide">1</span> / <span id="total-slides">8</span>
+    <!-- Navigation & Counter -->
+    <div id="prev-btn" class="nav-button"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg></div>
+    <div id="next-btn" class="nav-button"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg></div>
+    <div class="slide-counter"><span id="current-slide">1</span> / <span id="total-slides">8</span></div>
+
+    <!-- Modal Structure -->
+    <div id="tech-modal" class="modal">
+      <div id="modal-content" class="modal-content glass-card">
+        <span id="close-btn" class="close-btn">&times;</span>
+        <h3 id="modal-title" class="text-3xl font-bold accent-text mb-4"></h3>
+        <div id="modal-body" class="text-gray-300 space-y-3 text-lg"></div>
+      </div>
     </div>
 
     <script>
@@ -356,46 +412,64 @@
             const totalSlidesCounter = document.getElementById('total-slides');
             let currentSlide = 0;
 
-            totalSlidesCounter.textContent = slides.length;
+            const modal = document.getElementById('tech-modal');
+            const modalTitle = document.getElementById('modal-title');
+            const modalBody = document.getElementById('modal-body');
+            const closeBtn = document.getElementById('close-btn');
 
-            function showSlide(index) {
-                // Wrap around logic
-                if (index >= slides.length) {
-                    currentSlide = 0;
-                } else if (index < 0) {
-                    currentSlide = slides.length - 1;
-                } else {
-                    currentSlide = index;
+            const modalData = {
+                'gps': { title: 'GPS Médico: El Detalle', content: `<p><strong>Objetivo:</strong> Transformar datos tabulares en insights geoespaciales interactivos.</p><p><strong>Cómo:</strong></p><ul class="list-disc list-inside ml-4"><li><strong>Agregación:</strong> Usaremos <strong>Pandas</strong> para agrupar los 1.1M de registros por departamento, provincia y distrito.</li><li><strong>Geo-visualización:</strong> Implementaremos <strong>Plotly Express</strong> o <strong>Folium</strong> para renderizar mapas coropléticos que muestren los "puntos calientes" de mortalidad.</li><li><strong>Interactividad:</strong> Los usuarios podrán filtrar por demografía y causa para ver cómo cambian los patrones en el mapa.</li></ul>` },
+                'oracle': { title: 'Oráculo IA: El Detalle', content: `<p><strong>Objetivo:</strong> Construir un modelo de clasificación robusto que prediga la categoría de causa de muerte.</p><p><strong>Cómo:</strong></p><ul class="list-disc list-inside ml-4"><li><strong>Feature Engineering:</strong> Convertiremos variables categóricas en números y crearemos nuevas como 'grupo_etario'.</li><li><strong>Modelo:</strong> Elegimos <strong>XGBoost</strong> por su alto rendimiento y su capacidad para manejar datos complejos.</li><li><strong>Validación:</strong> Usaremos validación cruzada para asegurar que el modelo generaliza bien, midiendo con <strong>F1-Score</strong> para manejar clases desbalanceadas.</li></ul>` },
+                'scalpel': { title: 'Bisturí Digital: El Detalle', content: `<p><strong>Objetivo:</strong> Hacer nuestro modelo interpretable y confiable.</p><p><strong>Cómo:</strong></p><ul class="list-disc list-inside ml-4"><li><strong>Explicabilidad:</strong> Integraremos <strong>SHAP</strong> para calcular la contribución de cada 'feature' (edad, región) a una predicción.</li><li><strong>Visualización de Insights:</strong> Generaremos gráficos de fuerza (force plots) de SHAP que mostrarán visualmente qué factores influyen en la predicción.</li><li><strong>Resultado:</strong> En lugar de solo decir "Riesgo alto", diremos "Riesgo alto **porque** vive en esta región y tiene esta edad".</li></ul>` },
+                'data-eng': { title: 'Stack: Ingeniería de Datos', content: `<p><strong>Por qué:</strong> Es la base de todo. Sin datos limpios y bien estructurados, el mejor modelo es inútil.</p><p><strong>Uso Práctico:</strong></p><ul class="list-disc list-inside ml-4"><li><strong>Pandas & NumPy:</strong> Para limpieza masiva, transformación de datos y manejo de valores nulos con alta eficiencia.</li></ul>` },
+                'ml': { title: 'Stack: ML Predictivo', content: `<p><strong>Por qué:</strong> Aquí creamos el valor predictivo, anticipándonos al futuro.</p><p><strong>Uso Práctico:</strong></p><ul class="list-disc list-inside ml-4"><li><strong>Scikit-learn:</strong> Para el preprocesamiento, pipelines y evaluación del modelo.</li><li><strong>XGBoost:</strong> Nuestro modelo principal, por su velocidad y precisión líderes en la industria.</li></ul>` },
+                'xai': { title: 'Stack: Explicabilidad (XAI)', content: `<p><strong>Por qué:</strong> En salud pública, la confianza es crucial. Un modelo que no podemos explicar, no se puede implementar.</p><p><strong>Uso Práctico:</strong></p><ul class="list-disc list-inside ml-4"><li><strong>SHAP:</strong> Para justificar cada predicción, generando los insights que los gestores necesitan para actuar.</li></ul>` },
+                'deploy': { title: 'Stack: Despliegue', content: `<p><strong>Por qué:</strong> Una idea solo es útil si la gente puede usarla. El despliegue convierte nuestro código en un producto real.</p><p><strong>Uso Práctico:</strong></p><ul class="list-disc list-inside ml-4"><li><strong>Streamlit:</strong> Para construir el front-end interactivo en Python puro, de forma increíblemente rápida.</li><li><strong>Docker:</strong> Para "empaquetar" nuestra aplicación, garantizando que funcione en cualquier entorno.</li></ul>` },
+                'semana1': { title: 'Semana 1: Ingeniería de Datos', content: `<p><strong>Objetivo Principal:</strong> Tener un dataset limpio, estructurado y listo para el análisis. Esta es la base de todo el proyecto.</p><p><strong>Tareas Clave:</strong></p><ul class="list-disc list-inside ml-4 space-y-2"><li><strong>Limpieza de Datos:</strong> Identificar y manejar valores nulos en columnas críticas (edad, sexo, causa de muerte).</li><li><strong>Feature Engineering:</strong> Crear la columna <code class='text-cyan-300'>EDAD_UNIFICADA</code> a partir de 'EDAD' y 'TIEMPO EDAD'.</li><li><strong>Categorización de Target:</strong> Investigar y agrupar los códigos CIE-10 en 5-7 categorías de alto nivel (Cardiovasculares, Cáncer, etc.).</li><li><strong>Entregable de la Semana:</strong> Un script de Python que toma el CSV crudo y devuelve un CSV limpio y procesado.</li></ul>`},
+                'semana2': { title: 'Semana 2: Análisis Exploratorio (EDA)', content: `<p><strong>Objetivo Principal:</strong> Entender los datos a profundidad, descubrir patrones iniciales y generar las visualizaciones para el dashboard.</p><p><strong>Tareas Clave:</strong></p><ul class="list-disc list-inside ml-4 space-y-2"><li><strong>Análisis Descriptivo:</strong> Generar estadísticas clave y distribuciones para las variables importantes.</li><li><strong>Correlaciones:</strong> Investigar relaciones entre variables (ej. Muerte Violenta vs. Edad/Sexo).</li><li><strong>Visualizaciones Geoespaciales:</strong> Crear los primeros mapas coropléticos para identificar "puntos calientes".</li><li><strong>Entregable de la Semana:</strong> Un Jupyter Notebook con todos los hallazgos del EDA y los gráficos generados.</li></ul>`},
+                'semana3': { title: 'Semana 3: Modelado Predictivo', content: `<p><strong>Objetivo Principal:</strong> Construir, entrenar y evaluar nuestro modelo de Machine Learning.</p><p><strong>Tareas Clave:</strong></p><ul class="list-disc list-inside ml-4 space-y-2"><li><strong>Pipeline de Preprocesamiento:</strong> Usar Scikit-learn para crear un pipeline que maneje la codificación y el escalado.</li><li><strong>Entrenamiento de Modelo:</strong> Entrenar un modelo base (Regresión Logística) y nuestro modelo principal (XGBoost).</li><li><strong>Evaluación Rigurosa:</strong> Usar validación cruzada y medir con F1-Score y AUC-ROC.</li><li><strong>Implementación de SHAP:</strong> Calcular los valores SHAP para el modelo final.</li><li><strong>Entregable de la Semana:</strong> Un modelo entrenado y serializado (.pkl) y un notebook documentando el proceso.</li></ul>`},
+                'semana4': { title: 'Semana 4: App y Despliegue (MVP)', content: `<p><strong>Objetivo Principal:</strong> Integrar todo en un Producto Mínimo Viable (MVP) funcional y preparar la demo final.</p><p><strong>Tareas Clave:</strong></p><ul class="list-disc list-inside ml-4 space-y-2"><li><strong>Desarrollo de la UI:</strong> Construir la interfaz de usuario en Streamlit con filtros y pestañas.</li><li><strong>Integración del Backend:</strong> Conectar los gráficos del EDA y la función de predicción a la interfaz.</li><li><strong>Despliegue en la Nube:</strong> Publicar la aplicación en Streamlit Cloud.</li><li><strong>Preparación de la Demo:</strong> Documentar y practicar la presentación del proyecto.</li><li><strong>Entregable de la Semana:</strong> La URL de la aplicación web funcional y la presentación final.</li></ul>`},
+                'vision_producto': { title: 'Visión del Producto y Modelo', content: `<h4 class="text-2xl font-bold text-white mb-3">1. El Producto Final: App Interactiva</h4><p class="mb-4">Visualizamos una aplicación web en <strong>Streamlit</strong>, limpia y profesional. Un usuario usará filtros en una barra lateral (región, edad, sexo) para explorar datos en un panel principal con 3 pestañas:</p><ul class="list-disc list-inside ml-4 space-y-2"><li><strong>Dashboard General:</strong> Un mapa interactivo de Perú y KPIs que reaccionan a los filtros.</li><li><strong>Simulador de Riesgo:</strong> El usuario define un perfil y el modelo predice las probabilidades de causa de muerte en un gráfico de barras.</li><li><strong>Explicabilidad (El "Porqué"):</strong> Un gráfico SHAP que muestra qué factores influyeron más en la predicción del simulador.</li></ul><h4 class="text-2xl font-bold text-white mt-6 mb-3">2. Arquitectura del Modelo</h4><p><strong>Entradas (Features):</strong> El modelo se alimentará de variables preprocesadas como:</p><ul class="list-disc list-inside ml-4"><li><code class='text-cyan-300'>EDAD_UNIFICADA</code> (Numérica)</li><li><code class='text-cyan-300'>SEXO</code>, <code class='text-cyan-300'>ESTADO_CIVIL</code> (Categóricas)</li><li><code class='text-cyan-300'>DEPARTAMENTO</code> (Geográfica)</li><li><code class='text-cyan-300'>TIPO_SEGURO</code> (Contextual)</li></ul><p class="mt-2"><strong>Salida (Target):</strong> El modelo predecirá un <strong>array de probabilidades</strong> para 5 categorías de muerte (ej. Cardiovasculares, Cáncer, Externas, etc.), que la app visualizará como un gráfico de barras.</p>`}
+            };
+
+            window.showModal = (key) => {
+                const data = modalData[key];
+                if (data) {
+                    modalTitle.textContent = data.title;
+                    modalBody.innerHTML = data.content;
+                    modal.style.display = "block";
                 }
-                
-                slides.forEach((slide, i) => {
-                    slide.classList.remove('active');
-                });
-                slides[currentSlide].classList.add('active');
+            };
+            
+            closeBtn.onclick = () => { modal.style.display = "none"; };
+            window.onclick = (event) => {
+                if (event.target == modal) {
+                    modal.style.display = "none";
+                }
+            };
 
+            totalSlidesCounter.textContent = slides.length;
+            function showSlide(index) {
+                if (index >= slides.length) currentSlide = 0;
+                else if (index < 0) currentSlide = slides.length - 1;
+                else currentSlide = index;
+                slides.forEach((slide, i) => slide.classList.toggle('active', i === currentSlide));
                 currentSlideCounter.textContent = currentSlide + 1;
             }
 
-            prevBtn.addEventListener('click', () => {
-                showSlide(currentSlide - 1);
-            });
-
-            nextBtn.addEventListener('click', () => {
-                showSlide(currentSlide + 1);
-            });
+            prevBtn.addEventListener('click', () => showSlide(currentSlide - 1));
+            nextBtn.addEventListener('click', () => showSlide(currentSlide + 1));
             
             document.addEventListener('keydown', (e) => {
-                if (e.key === 'ArrowRight' || e.key === ' ') {
-                    e.preventDefault();
-                    showSlide(currentSlide + 1);
-                } else if (e.key === 'ArrowLeft') {
-                    e.preventDefault();
-                    showSlide(currentSlide - 1);
+                if (modal.style.display === 'block') {
+                    if (e.key === 'Escape') modal.style.display = "none";
+                    return;
                 }
+                if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); showSlide(currentSlide + 1); } 
+                else if (e.key === 'ArrowLeft') { e.preventDefault(); showSlide(currentSlide - 1); }
             });
-
-            showSlide(0); // Show the first slide initially
+            showSlide(0);
         });
     </script>
 </body>
-</html>
+</ht
