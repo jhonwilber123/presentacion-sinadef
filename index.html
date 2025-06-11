@@ -16,34 +16,33 @@
     <style>
         body {
             font-family: 'Poppins', sans-serif;
-            background: #0a0c10; /* Fondo más oscuro y sólido */
+            background: #0a0c10; /* Fondo oscuro sólido y profesional */
             color: #c9d1d9;
             overflow: hidden;
         }
 
         .slide {
-            display: none;
             min-height: 100vh;
             width: 100%;
-            display: flex;
+            display: none; /* Se ocultan por defecto */
             flex-direction: column;
             justify-content: center;
             align-items: center;
             padding: 2rem;
             text-align: center;
             opacity: 0;
-            transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            transition: all 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             position: absolute;
             top: 0;
             left: 0;
-            transform: translateX(100px);
+            transform: translateX(50px) scale(0.98); /* Animación de entrada */
         }
 
         .slide.active {
-            display: flex;
+            display: flex; /* Se muestra la diapositiva activa */
             opacity: 1;
             z-index: 10;
-            transform: translateX(0);
+            transform: translateX(0) scale(1);
         }
 
         .accent-text {
@@ -58,8 +57,8 @@
         }
         
         .glass-card {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(15px);
+            background: rgba(13, 27, 42, 0.5); /* Color de fondo más oscuro y menos transparente */
+            backdrop-filter: blur(12px);
             border: 1px solid rgba(34, 211, 238, 0.2);
             border-radius: 1rem;
             transition: all 0.3s ease;
@@ -68,7 +67,7 @@
         .glass-card:hover {
             transform: translateY(-5px);
             border-color: rgba(34, 211, 238, 0.4);
-            box-shadow: 0 20px 40px rgba(34, 211, 238, 0.1);
+            box-shadow: 0 10px 30px rgba(34, 211, 238, 0.1);
         }
 
         .nav-button {
@@ -105,136 +104,117 @@
             left: 50%;
             transform: translateX(-50%);
             z-index: 20;
-            background: rgba(0, 0, 0, 0.3);
+            background: rgba(0, 0, 0, 0.5);
             backdrop-filter: blur(10px);
-            border: 1px solid rgba(34, 211, 238, 0.3);
+            border: 1px solid rgba(34, 211, 238, 0.2);
             border-radius: 2rem;
-            padding: 0.5rem 1rem;
-            font-size: 0.875rem;
+            padding: 0.5rem 1.5rem;
+            font-size: 1rem;
+            font-weight: 600;
             color: #22d3ee;
         }
 
         .pulse-animation {
-            animation: pulse 2s infinite;
+            animation: pulse 2.5s infinite;
         }
 
         @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.7; }
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.8; transform: scale(1.02); }
         }
 
         .float-animation {
-            animation: float 3s ease-in-out infinite;
+            animation: float 4s ease-in-out infinite;
         }
 
         @keyframes float {
             0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
+            50% { transform: translateY(-15px); }
         }
 
         .highlight-box {
             background: linear-gradient(135deg, rgba(34, 211, 238, 0.1) 0%, rgba(6, 182, 212, 0.05) 100%);
-            border: 2px solid rgba(34, 211, 238, 0.3);
-            border-radius: 1rem;
+            border-left: 4px solid #22d3ee;
+            border-radius: 0.5rem;
             padding: 1.5rem;
             margin: 1rem 0;
-        }
-        
-        .stat-card {
-            background: rgba(34, 211, 238, 0.05);
-            border: 2px solid rgba(34, 211, 238, 0.2);
-            border-radius: 1rem;
-            padding: 2rem;
-            transition: all 0.3s ease;
-        }
-
-        .stat-card:hover {
-            border-color: rgba(34, 211, 238, 0.5);
-            box-shadow: 0 0 30px rgba(34, 211, 238, 0.15);
         }
     </style>
 </head>
 <body>
 
-    <!-- Slide 1: Title -->
+    <!-- Slide 1: Título (Tono colaborativo) -->
     <section id="slide-1" class="slide active">
         <div class="flex flex-col items-center gap-6">
             <div class="float-animation">
                 <h1 class="text-6xl md:text-8xl lg:text-9xl font-black uppercase tracking-wider text-white drop-shadow-2xl">SINADEF INSIGHT</h1>
             </div>
-            <h3 class="text-2xl md:text-3xl lg:text-4xl font-light accent-text">De los Datos a las Decisiones que Salvan Vidas</h3>
-            <div class="highlight-box mt-8">
-                <p class="text-lg md:text-xl text-gray-300">Transformando 1.1M de registros médicos en inteligencia accionable</p>
+            <h3 class="text-2xl md:text-3xl lg:text-4xl font-light accent-text">Una Propuesta de Proyecto con Propósito</h3>
+            <div class="highlight-box mt-8 max-w-2xl">
+                <p class="text-lg md:text-xl text-gray-300">Hola equipo, consideremos una idea que nos puede unir para crear algo con un impacto real y un gran valor técnico.</p>
             </div>
-            <p class="text-sm md:text-base text-gray-500 mt-4">Propuesta de Proyecto Final | Le Wagon LatAm | 7 de junio de 2025</p>
+            <p class="text-sm md:text-base text-gray-500 mt-4">Propuesta para el Proyecto Final | Le Wagon LatAm</p>
         </div>
     </section>
 
-    <!-- Slide 2: The Problem -->
+    <!-- Slide 2: The Problem (Aclarado) -->
     <section id="slide-2" class="slide">
-        <div class="w-full max-w-6xl mx-auto flex flex-col items-center justify-center gap-12">
-            <h2 class="text-4xl md:text-5xl font-bold text-white mb-4">El Problema que Mata en Silencio</h2>
-            <p class="text-xl text-gray-400 mb-12">Mientras los datos duermen, las personas mueren</p>
+        <div class="w-full max-w-6xl mx-auto flex flex-col items-center justify-center gap-8">
+            <h2 class="text-5xl md:text-6xl font-bold text-white mb-2">El Dilema: Decidir a Ciegas</h2>
+            <p class="text-2xl text-gray-400 mb-10">Imaginen a un gestor de salud con un presupuesto limitado. ¿Cómo sabe dónde invertir para salvar más vidas?</p>
             
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8 w-full">
-                <div class="stat-card text-center">
-                    <h1 class="text-6xl md:text-7xl font-black accent-text pulse-animation">1.1M</h1>
-                    <p class="text-lg text-gray-300 mt-2">Registros en SINADEF Perú</p>
+                <div class="glass-card p-6 text-center">
+                    <h1 class="text-5xl md:text-6xl font-black accent-text">Datos</h1>
+                    <p class="text-lg text-gray-300 mt-2">Existen 1.1M de registros.</p>
                 </div>
-                <div class="stat-card text-center">
-                    <h1 class="text-6xl md:text-7xl font-black text-red-400 pulse-animation">0%</h1>
-                    <p class="text-lg text-gray-300 mt-2">Utilizados para predicción</p>
+                <div class="glass-card p-6 text-center">
+                    <h1 class="text-5xl md:text-6xl font-black text-red-400">Duda</h1>
+                    <p class="text-lg text-gray-300 mt-2">Las decisiones se basan en intuición.</p>
                 </div>
-                <div class="stat-card text-center">
-                    <h1 class="text-6xl md:text-7xl font-black text-yellow-400 pulse-animation">∞</h1>
-                    <p class="text-lg text-gray-300 mt-2">Vidas que se pueden salvar</p>
+                <div class="glass-card p-6 text-center">
+                    <h1 class="text-5xl md:text-6xl font-black text-yellow-400">Vidas</h1>
+                    <p class="text-lg text-gray-300 mt-2">Están en juego con cada decisión.</p>
                 </div>
             </div>
             
-            <div class="highlight-box max-w-4xl">
-                <p class="text-xl md:text-2xl text-gray-200 font-light">
-                    <span class="font-bold text-red-400">El costo de la inacción:</span> Decisiones médicas críticas tomadas sin la inteligencia que ya existe en nuestros datos.
+            <div class="highlight-box max-w-4xl mt-10">
+                <p class="text-2xl md:text-3xl text-gray-200 font-light">
+                    <span class="font-bold text-cyan-400">Nuestra Misión:</span> Cerrar la brecha entre tener datos y usarlos para tomar la mejor decisión posible.
                 </p>
             </div>
         </div>
     </section>
 
-    <!-- Slide 3: The Solution -->
+    <!-- Slide 3: The Solution (Explicabilidad aclarada) -->
     <section id="slide-3" class="slide">
         <div class="w-full max-w-7xl mx-auto">
-            <h2 class="text-4xl md:text-6xl font-bold text-white mb-4">Nuestra Tríada Letal</h2>
-            <p class="text-xl text-gray-400 mb-16">Contra la incertidumbre médica</p>
+            <h2 class="text-4xl md:text-6xl font-bold text-white mb-4">Nuestra Solución: Una Herramienta de Precisión</h2>
+            <p class="text-xl text-gray-400 mb-12">Construyamos juntos un sistema que ilumine, prediga y explique.</p>
             
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="p-8 glass-card flex flex-col items-center gap-6 hover:scale-105 transition-transform">
+                <div class="p-8 glass-card flex flex-col items-center gap-6">
                     <div class="w-20 h-20 accent-bg rounded-full flex items-center justify-center">
-                        <svg class="w-12 h-12 text-gray-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                        </svg>
+                        <svg class="w-12 h-12 text-gray-900" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
                     </div>
-                    <h3 class="text-3xl font-bold text-white">GPS MÉDICO</h3>
-                    <p class="text-lg text-gray-300 text-center">Mapea patrones de mortalidad por región y demografía</p>
+                    <h3 class="text-3xl font-bold text-white">VISUALIZAR (GPS)</h3>
+                    <p class="text-lg text-gray-300 text-center">Mapear los "puntos calientes" de mortalidad.</p>
                 </div>
                 
-                <div class="p-8 glass-card flex flex-col items-center gap-6 border-2 border-cyan-400 shadow-2xl shadow-cyan-500/30 hover:scale-105 transition-transform">
+                <div class="p-8 glass-card flex flex-col items-center gap-6 border-2 border-cyan-400 shadow-2xl shadow-cyan-500/30">
                     <div class="w-20 h-20 accent-bg rounded-full flex items-center justify-center pulse-animation">
-                        <svg class="w-12 h-12 text-gray-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-                        </svg>
+                       <svg class="w-12 h-12 text-gray-900" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path></svg>
                     </div>
-                    <h3 class="text-3xl font-bold text-white">ORÁCULO IA</h3>
-                    <p class="text-lg text-gray-300 text-center">Predice riesgo de mortalidad con Machine Learning avanzado</p>
+                    <h3 class="text-3xl font-bold text-white">PREDECIR</h3>
+                    <p class="text-lg text-gray-300 text-center">Identificar perfiles de alto riesgo con Machine Learning.</p>
                 </div>
                 
-                <div class="p-8 glass-card flex flex-col items-center gap-6 hover:scale-105 transition-transform">
+                <div class="p-8 glass-card flex flex-col items-center gap-6">
                     <div class="w-20 h-20 accent-bg rounded-full flex items-center justify-center">
-                        <svg class="w-12 h-12 text-gray-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
-                        </svg>
+                        <svg class="w-12 h-12 text-gray-900" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
                     </div>
-                    <h3 class="text-3xl font-bold text-white">BISTURÍ DIGITAL</h3>
-                    <p class="text-lg text-gray-300 text-center">Intervenciones precisas basadas en evidencia</p>
+                    <h3 class="text-3xl font-bold text-white">EXPLICAR (CAJA DE CRISTAL)</h3>
+                    <p class="text-lg text-gray-300 text-center">No solo predecir el 'qué', sino explicar el 'porqué' del riesgo para poder actuar.</p>
                 </div>
             </div>
         </div>
@@ -243,188 +223,123 @@
     <!-- Slide 4: Skills -->
     <section id="slide-4" class="slide">
         <div class="w-full max-w-7xl mx-auto">
-            <h2 class="text-4xl md:text-5xl font-bold text-white mb-8">El Stack que Te Hará Irresistible</h2>
-            <p class="text-xl text-gray-400 mb-16">Tecnologías que el mercado paga en oro</p>
+            <h2 class="text-4xl md:text-5xl font-bold text-white mb-4">Nuestro Stack de Habilidades</h2>
+            <p class="text-xl text-gray-400 mb-12">Una oportunidad para dominar juntos el ciclo completo de la ciencia de datos.</p>
             
-            <div class="flex flex-col lg:flex-row items-center justify-center gap-6">
-                <div class="p-6 glass-card text-center min-w-[200px]">
-                    <h4 class="text-xl font-bold text-white mb-2">Ingeniería de Datos</h4>
-                    <p class="text-cyan-400 text-sm">Pandas • NumPy • SQL</p>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                <div class="p-6 glass-card text-center">
+                    <h4 class="text-xl font-bold text-white mb-2">Data Engineering</h4>
+                    <p class="text-cyan-400 text-sm">Pandas, NumPy</p>
                 </div>
-                <div class="text-3xl font-black accent-text">→</div>
-                <div class="p-6 glass-card text-center min-w-[200px] border-2 border-cyan-400">
+                <div class="p-6 glass-card text-center border-2 border-cyan-400">
                     <h4 class="text-xl font-bold text-white mb-2">ML Predictivo</h4>
-                    <p class="text-cyan-400 text-sm">XGBoost • Scikit-learn</p>
+                    <p class="text-cyan-400 text-sm">Scikit-learn, XGBoost</p>
                 </div>
-                <div class="text-3xl font-black accent-text">→</div>
-                <div class="p-6 glass-card text-center min-w-[200px]">
-                    <h4 class="text-xl font-bold text-white mb-2">Explicabilidad</h4>
-                    <p class="text-cyan-400 text-sm">SHAP • LIME</p>
+                <div class="p-6 glass-card text-center">
+                    <h4 class="text-xl font-bold text-white mb-2">Explicabilidad (XAI)</h4>
+                    <p class="text-cyan-400 text-sm">SHAP</p>
                 </div>
-                <div class="text-3xl font-black accent-text">→</div>
-                <div class="p-6 glass-card text-center min-w-[200px]">
+                 <div class="p-6 glass-card text-center">
                     <h4 class="text-xl font-bold text-white mb-2">Despliegue</h4>
-                    <p class="text-cyan-400 text-sm">Streamlit • Docker</p>
+                    <p class="text-cyan-400 text-sm">Streamlit, Git/GitHub</p>
                 </div>
             </div>
             
             <div class="highlight-box mt-16 max-w-4xl mx-auto">
                 <p class="text-2xl md:text-3xl font-bold text-white">
-                    El único proyecto que domina el <span class="accent-text">PIPELINE COMPLETO</span>
-                </p>
-                <p class="text-lg text-gray-300 mt-4">
-                    Desde datos crudos hasta aplicación en producción
+                    Al final, no tendremos solo un análisis. Tendremos un <span class="accent-text">producto de datos de punta a punta.</span>
                 </p>
             </div>
         </div>
     </section>
 
-    <!-- Slide 5: The Impact -->
+    <!-- Slide 5: The Impact (Tono modificado) -->
     <section id="slide-5" class="slide">
-        <div class="w-full max-w-7xl mx-auto">
-            <h2 class="text-4xl md:text-5xl font-bold text-white mb-8">¿Qué Dirás en Tu Próxima Entrevista?</h2>
-            <p class="text-xl text-gray-400 mb-16">La diferencia entre ser recordado o ser olvidado</p>
+        <div class="w-full max-w-5xl mx-auto">
+            <h2 class="text-4xl md:text-5xl font-bold text-white mb-6">Una Historia con Propósito</h2>
+            <p class="text-xl text-gray-400 mb-12">Al final del bootcamp, todos tendremos un gran proyecto. ¿Y si el nuestro cuenta una historia especial?</p>
             
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
-                <!-- Boring Project -->
-                <div class="p-8 rounded-2xl bg-gray-800/50 flex flex-col justify-center items-center h-full border-2 border-gray-600">
-                    <div class="text-gray-500 mb-6">
-                        <svg class="w-20 h-20 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z"></path>
-                        </svg>
-                    </div>
-                    <h3 class="text-2xl font-bold text-gray-400 mb-4">Proyecto Genérico</h3>
-                    <div class="text-center space-y-3">
-                        <p class="text-lg text-gray-500 italic">"Predije ventas de e-commerce..."</p>
-                        <p class="text-lg text-gray-500 italic">"Clasifiqué imágenes de gatos..."</p>
-                        <p class="text-lg text-gray-500 italic">"Analicé datos de Titanic..."</p>
-                    </div>
-                    <p class="text-red-400 font-bold mt-6">😴 Bostezos garantizados</p>
-                </div>
-                
-                <!-- Our Project -->
-                <div class="p-8 rounded-2xl accent-bg flex flex-col justify-center items-center h-full shadow-2xl shadow-cyan-500/50 border-2 border-cyan-300">
-                    <div class="text-gray-900 mb-6">
-                        <svg class="w-20 h-20 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
-                        </svg>
-                    </div>
-                    <h3 class="text-2xl font-bold text-gray-900 mb-4">SINADEF Insight</h3>
-                    <div class="text-center">
-                        <p class="text-xl text-gray-900 font-bold mb-4">
-                            "Desarrollé un sistema de IA que puede salvar vidas usando datos reales del sistema de salud peruano."
-                        </p>
-                        <div class="space-y-2 text-gray-800">
-                            <p>✓ Impacto social real</p>
-                            <p>✓ Datos gubernamentales</p>
-                            <p>✓ Pipeline completo de ML</p>
-                            <p>✓ Aplicación desplegada</p>
-                        </div>
-                    </div>
-                    <p class="text-gray-900 font-bold mt-6">🚀 ¡Contratado al instante!</p>
-                </div>
+            <div class="p-10 glass-card border-2 border-cyan-400 shadow-2xl shadow-cyan-500/30">
+                 <h3 class="text-3xl font-bold text-white mb-4">Nuestro Caso de Estudio</h3>
+                 <p class="text-xl text-gray-300 font-light">
+                    Una historia sobre cómo, como equipo, usamos datos masivos no para vender más, sino para abordar un desafío social. Una historia que demuestra un dominio técnico completo, desde los datos crudos hasta una app de IA desplegada. Pienso que esa es una historia que a todos nos enorgullecería contar.
+                 </p>
             </div>
         </div>
     </section>
 
-    <!-- Slide 6: The Plan -->
+    <!-- Slide 6: The Plan (Flexibilidad añadida) -->
     <section id="slide-6" class="slide">
         <div class="w-full max-w-5xl mx-auto">
-             <h2 class="text-4xl md:text-5xl font-bold text-white mb-8">Roadmap de 8 Semanas al Éxito</h2>
-             <p class="text-xl text-gray-400 mb-12">Cada sprint nos acerca a la meta</p>
+             <h2 class="text-4xl md:text-5xl font-bold text-white mb-4">Nuestra Hoja de Ruta Propuesta</h2>
+             <p class="text-xl text-gray-400 mb-12">Un plan ambicioso, pero flexible. Nuestra prioridad: un <span class="text-white font-bold">Producto Mínimo Viable (MVP)</span> funcional.</p>
              
-             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div class="flex items-center gap-4 p-6 glass-card hover:scale-105 transition-transform">
-                    <span class="flex items-center justify-center w-12 h-12 rounded-full accent-bg text-gray-900 font-bold text-xl">1-2</span>
+             <div class="space-y-4">
+                <div class="flex items-center gap-4 p-4 glass-card">
+                    <span class="flex items-center justify-center w-24 h-12 rounded-md accent-bg text-gray-900 font-bold text-xl">Sem 1</span>
                     <div>
-                        <h4 class="text-xl font-bold text-white">Data Engineering</h4>
-                        <p class="text-gray-400">Limpieza y preparación de 1.1M registros</p>
+                        <h4 class="text-xl font-bold text-white">Ingeniería de Datos</h4>
+                        <p class="text-gray-400">Limpieza y categorización de 1.1M de registros.</p>
                     </div>
                 </div>
-                
-                <div class="flex items-center gap-4 p-6 glass-card hover:scale-105 transition-transform">
-                    <span class="flex items-center justify-center w-12 h-12 rounded-full accent-bg text-gray-900 font-bold text-xl">3-4</span>
+                <div class="flex items-center gap-4 p-4 glass-card">
+                    <span class="flex items-center justify-center w-24 h-12 rounded-md accent-bg text-gray-900 font-bold text-xl">Sem 2</span>
                     <div>
-                        <h4 class="text-xl font-bold text-white">EDA + Feature Engineering</h4>
-                        <p class="text-gray-400">Descubrimiento de patrones ocultos</p>
+                        <h4 class="text-xl font-bold text-white">Análisis Exploratorio (EDA)</h4>
+                        <p class="text-gray-400">Descubrir patrones y crear visualizaciones.</p>
                     </div>
                 </div>
-                
-                <div class="flex items-center gap-4 p-6 glass-card hover:scale-105 transition-transform">
-                    <span class="flex items-center justify-center w-12 h-12 rounded-full accent-bg text-gray-900 font-bold text-xl">5-6</span>
+                <div class="flex items-center gap-4 p-4 glass-card">
+                    <span class="flex items-center justify-center w-24 h-12 rounded-md accent-bg text-gray-900 font-bold text-xl">Sem 3</span>
                     <div>
                         <h4 class="text-xl font-bold text-white">Modelado Predictivo</h4>
-                        <p class="text-gray-400">XGBoost + Interpretabilidad con SHAP</p>
+                        <p class="text-gray-400">Entrenar modelo de riesgo con XGBoost y SHAP.</p>
                     </div>
                 </div>
-                
-                <div class="flex items-center gap-4 p-6 glass-card hover:scale-105 transition-transform">
-                    <span class="flex items-center justify-center w-12 h-12 rounded-full accent-bg text-gray-900 font-bold text-xl">7-8</span>
+                <div class="flex items-center gap-4 p-4 glass-card">
+                    <span class="flex items-center justify-center w-24 h-12 rounded-md accent-bg text-gray-900 font-bold text-xl">Sem 4</span>
                     <div>
-                        <h4 class="text-xl font-bold text-white">Deployment + Demo</h4>
-                        <p class="text-gray-400">App funcional + Presentación épica</p>
+                        <h4 class="text-xl font-bold text-white">App y Despliegue</h4>
+                        <p class="text-gray-400">Construir el MVP en Streamlit y preparar la demo.</p>
                     </div>
                 </div>
-             </div>
-             
-             <div class="highlight-box mt-12">
-                <p class="text-xl font-bold text-white">
-                    <span class="accent-text">Riesgo calculado.</span> Plan ejecutable. <span class="accent-text">Impacto garantizado.</span>
-                </p>
              </div>
         </div>
     </section>
 
-    <!-- Slide 7: Call to Action -->
+    <!-- Slide 7: Call to Action (Tono modificado) -->
     <section id="slide-7" class="slide">
         <div class="text-center max-w-6xl mx-auto">
             <h1 class="text-5xl md:text-7xl lg:text-8xl font-black uppercase text-white leading-tight mb-8">
-                ¿Un Proyecto Más<br>o un<br><span class="accent-text pulse-animation">Legado que Perdura?</span>
+                Una Misión Conjunta
             </h1>
-            
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16">
-                <div class="stat-card">
-                    <h3 class="text-3xl font-bold accent-text">Portfolio</h3>
-                    <p class="text-gray-300 mt-2">Que abre puertas</p>
-                </div>
-                <div class="stat-card">
-                    <h3 class="text-3xl font-bold accent-text">Skills</h3>
-                    <p class="text-gray-300 mt-2">Que el mercado demanda</p>
-                </div>
-                <div class="stat-card">
-                    <h3 class="text-3xl font-bold accent-text">Impacto</h3>
-                    <p class="text-gray-300 mt-2">Que salva vidas</p>
-                </div>
+            <p class="text-2xl md:text-4xl font-light text-gray-300 mb-16">
+               Este es un proyecto ambicioso, y por eso mismo creo que es perfecto para el increíble talento que tenemos en este equipo.
+            </p>
+            <div class="highlight-box max-w-3xl mx-auto">
+                 <p class="text-2xl md:text-4xl text-white font-bold">
+                    Me encantaría <span class="accent-text pulse-animation">construir esto con ustedes.</span>
+                 </p>
             </div>
+             <p class="text-lg text-gray-500 mt-16">Mi tesis de grado se centra en este tema. No es una idea improvisada; es un área que me apasiona y en la que me gustaría que colaboremos.</p>
         </div>
     </section>
 
-    <!-- Slide 8: Thanks -->
+    <!-- Slide 8: Thanks (Tono modificado) -->
     <section id="slide-8" class="slide">
          <div class="flex flex-col items-center gap-8">
             <h2 class="text-6xl md:text-8xl font-bold text-white float-animation">¡Gracias!</h2>
             <h3 class="text-4xl md:text-5xl font-light accent-text">SINADEF INSIGHT</h3>
-            <div class="highlight-box mt-8">
-                <p class="text-2xl md:text-3xl text-gray-200 font-bold">
-                    "Votemos por el <span class="accent-text">reto</span>.<br>
-                    Votemos por el <span class="accent-text">impacto</span>.<br>
-                    Votemos por el <span class="accent-text">futuro</span>."
-                </p>
-            </div>
-            <p class="text-lg text-gray-400 mt-4">¿Preguntas? 🚀</p>
+            <p class="text-3xl text-gray-200 mt-8">¿Qué opinan? Me encantaría escuchar sus ideas.</p>
         </div>
     </section>
 
     <!-- Navigation Buttons -->
     <div id="prev-btn" class="nav-button">
-        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
-        </svg>
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
     </div>
     <div id="next-btn" class="nav-button">
-        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-        </svg>
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
     </div>
 
     <!-- Slide Counter -->
@@ -444,6 +359,7 @@
             totalSlidesCounter.textContent = slides.length;
 
             function showSlide(index) {
+                // Wrap around logic
                 if (index >= slides.length) {
                     currentSlide = 0;
                 } else if (index < 0) {
@@ -453,12 +369,9 @@
                 }
                 
                 slides.forEach((slide, i) => {
-                    if (i === currentSlide) {
-                        slide.classList.add('active');
-                    } else {
-                        slide.classList.remove('active');
-                    }
+                    slide.classList.remove('active');
                 });
+                slides[currentSlide].classList.add('active');
 
                 currentSlideCounter.textContent = currentSlide + 1;
             }
@@ -478,16 +391,10 @@
                 } else if (e.key === 'ArrowLeft') {
                     e.preventDefault();
                     showSlide(currentSlide - 1);
-                } else if (e.key === 'Home') {
-                    e.preventDefault();
-                    showSlide(0);
-                } else if (e.key === 'End') {
-                    e.preventDefault();
-                    showSlide(slides.length - 1);
                 }
             });
 
-            showSlide(0);
+            showSlide(0); // Show the first slide initially
         });
     </script>
 </body>
