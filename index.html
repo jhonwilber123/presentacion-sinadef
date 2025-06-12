@@ -228,11 +228,15 @@
         </div>
     </section>
 
-    <!-- Slide 3: The Solution (Explicabilidad aclarada) -->
+    <!-- Slide 3: The Solution (Explicabilidad aclarada y Aclaración Metodológica) -->
     <section id="slide-3" class="slide">
         <div class="w-full max-w-7xl mx-auto">
             <h2 class="text-4xl md:text-6xl font-bold text-white mb-4">Nuestra Solución: Una Herramienta de Precisión</h2>
-            <p class="text-xl text-gray-400 mb-12">Construyamos juntos un sistema que ilumine, prediga y explique.</p>
+            <p class="text-xl text-gray-400 mb-6">Construyamos juntos un sistema que ilumine, prediga y explique.</p>
+            
+            <button class="mb-10 text-cyan-300 border border-cyan-300/50 rounded-full px-4 py-2 text-sm hover:bg-cyan-300/10 transition-colors" onclick="showModal('aclaracion')">
+                ⓘ Aclaración Metodológica Clave
+            </button>
             
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <div class="p-8 glass-card flex flex-col items-center gap-6 interactive-card hover:scale-105 transition-transform" onclick="showModal('gps')">
@@ -241,7 +245,6 @@
                     </div>
                     <h3 class="text-3xl font-bold text-white">VISUALIZAR (GPS)</h3>
                     <p class="text-lg text-gray-300 text-center">Mapear los "puntos calientes" de mortalidad.</p>
-                    <span class="text-cyan-400 text-sm mt-2 flex items-center gap-2">Ver detalles <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 5l7 7-7 7M5 5l7 7-7 7"></path></svg></span>
                 </div>
                 
                 <div class="p-8 glass-card flex flex-col items-center gap-6 border-2 border-cyan-400 shadow-2xl shadow-cyan-500/30 interactive-card hover:scale-105 transition-transform" onclick="showModal('oracle')">
@@ -250,7 +253,6 @@
                     </div>
                     <h3 class="text-3xl font-bold text-white">PREDECIR</h3>
                     <p class="text-lg text-gray-300 text-center">Identificar perfiles de alto riesgo con Machine Learning.</p>
-                    <span class="text-cyan-400 text-sm mt-2 flex items-center gap-2">Ver detalles <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 5l7 7-7 7M5 5l7 7-7 7"></path></svg></span>
                 </div>
                 
                 <div class="p-8 glass-card flex flex-col items-center gap-6 interactive-card hover:scale-105 transition-transform" onclick="showModal('scalpel')">
@@ -259,7 +261,6 @@
                     </div>
                     <h3 class="text-3xl font-bold text-white">EXPLICAR (CAJA DE CRISTAL)</h3>
                     <p class="text-lg text-gray-300 text-center">No solo predecir el 'qué', sino explicar el 'porqué' del riesgo.</p>
-                    <span class="text-cyan-400 text-sm mt-2 flex items-center gap-2">Ver detalles <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 5l7 7-7 7M5 5l7 7-7 7"></path></svg></span>
                 </div>
             </div>
         </div>
@@ -424,12 +425,27 @@
                 'data-eng': { title: 'Stack: Ingeniería de Datos', content: `<p><strong>Por qué:</strong> Es la base de todo. Sin datos limpios y bien estructurados, el mejor modelo es inútil.</p><p><strong>Uso Práctico:</strong></p><ul class="list-disc list-inside ml-4"><li><strong>Pandas & NumPy:</strong> Para limpieza masiva, transformación de datos y manejo de valores nulos con alta eficiencia.</li></ul>` },
                 'ml': { title: 'Stack: ML Predictivo', content: `<p><strong>Por qué:</strong> Aquí creamos el valor predictivo, anticipándonos al futuro.</p><p><strong>Uso Práctico:</strong></p><ul class="list-disc list-inside ml-4"><li><strong>Scikit-learn:</strong> Para el preprocesamiento, pipelines y evaluación del modelo.</li><li><strong>XGBoost:</strong> Nuestro modelo principal, por su velocidad y precisión líderes en la industria.</li></ul>` },
                 'xai': { title: 'Stack: Explicabilidad (XAI)', content: `<p><strong>Por qué:</strong> En salud pública, la confianza es crucial. Un modelo que no podemos explicar, no se puede implementar.</p><p><strong>Uso Práctico:</strong></p><ul class="list-disc list-inside ml-4"><li><strong>SHAP:</strong> Para justificar cada predicción, generando los insights que los gestores necesitan para actuar.</li></ul>` },
-                'deploy': { title: 'Stack: Despliegue', content: `<p><strong>Por qué:</strong> Una idea solo es útil si la gente puede usarla. El despliegue convierte nuestro código en un producto real.</p><p><strong>Uso Práctico:</strong></p><ul class="list-disc list-inside ml-4"><li><strong>Streamlit:</strong> Para construir el front-end interactivo en Python puro, de forma increíblemente rápida.</li><li><strong>Docker:</strong> Para "empaquetar" nuestra aplicación, garantizando que funcione en cualquier entorno.</li></ul>` },
+                'deploy': { title: 'Stack: Despliegue', content: `<p><strong>Por qué:</strong> Una idea solo es útil si la gente puede usarla. El despliegue convierte nuestro código en un producto real.</p><p><strong>Uso Práctico:</strong></p><ul class="list-disc list-inside ml-4"><li><strong>Streamlit:</strong> Para construir el front-end interactivo en Python puro, de forma increíblemente rápida.</li><li><strong>Git/GitHub:</strong> Para el control de versiones y el despliegue a través de Streamlit Cloud.</li></ul>` },
                 'semana1': { title: 'Semana 1: Ingeniería de Datos', content: `<p><strong>Objetivo Principal:</strong> Tener un dataset limpio, estructurado y listo para el análisis. Esta es la base de todo el proyecto.</p><p><strong>Tareas Clave:</strong></p><ul class="list-disc list-inside ml-4 space-y-2"><li><strong>Limpieza de Datos:</strong> Identificar y manejar valores nulos en columnas críticas (edad, sexo, causa de muerte).</li><li><strong>Feature Engineering:</strong> Crear la columna <code class='text-cyan-300'>EDAD_UNIFICADA</code> a partir de 'EDAD' y 'TIEMPO EDAD'.</li><li><strong>Categorización de Target:</strong> Investigar y agrupar los códigos CIE-10 en 5-7 categorías de alto nivel (Cardiovasculares, Cáncer, etc.).</li><li><strong>Entregable de la Semana:</strong> Un script de Python que toma el CSV crudo y devuelve un CSV limpio y procesado.</li></ul>`},
                 'semana2': { title: 'Semana 2: Análisis Exploratorio (EDA)', content: `<p><strong>Objetivo Principal:</strong> Entender los datos a profundidad, descubrir patrones iniciales y generar las visualizaciones para el dashboard.</p><p><strong>Tareas Clave:</strong></p><ul class="list-disc list-inside ml-4 space-y-2"><li><strong>Análisis Descriptivo:</strong> Generar estadísticas clave y distribuciones para las variables importantes.</li><li><strong>Correlaciones:</strong> Investigar relaciones entre variables (ej. Muerte Violenta vs. Edad/Sexo).</li><li><strong>Visualizaciones Geoespaciales:</strong> Crear los primeros mapas coropléticos para identificar "puntos calientes".</li><li><strong>Entregable de la Semana:</strong> Un Jupyter Notebook con todos los hallazgos del EDA y los gráficos generados.</li></ul>`},
                 'semana3': { title: 'Semana 3: Modelado Predictivo', content: `<p><strong>Objetivo Principal:</strong> Construir, entrenar y evaluar nuestro modelo de Machine Learning.</p><p><strong>Tareas Clave:</strong></p><ul class="list-disc list-inside ml-4 space-y-2"><li><strong>Pipeline de Preprocesamiento:</strong> Usar Scikit-learn para crear un pipeline que maneje la codificación y el escalado.</li><li><strong>Entrenamiento de Modelo:</strong> Entrenar un modelo base (Regresión Logística) y nuestro modelo principal (XGBoost).</li><li><strong>Evaluación Rigurosa:</strong> Usar validación cruzada y medir con F1-Score y AUC-ROC.</li><li><strong>Implementación de SHAP:</strong> Calcular los valores SHAP para el modelo final.</li><li><strong>Entregable de la Semana:</strong> Un modelo entrenado y serializado (.pkl) y un notebook documentando el proceso.</li></ul>`},
                 'semana4': { title: 'Semana 4: App y Despliegue (MVP)', content: `<p><strong>Objetivo Principal:</strong> Integrar todo en un Producto Mínimo Viable (MVP) funcional y preparar la demo final.</p><p><strong>Tareas Clave:</strong></p><ul class="list-disc list-inside ml-4 space-y-2"><li><strong>Desarrollo de la UI:</strong> Construir la interfaz de usuario en Streamlit con filtros y pestañas.</li><li><strong>Integración del Backend:</strong> Conectar los gráficos del EDA y la función de predicción a la interfaz.</li><li><strong>Despliegue en la Nube:</strong> Publicar la aplicación en Streamlit Cloud.</li><li><strong>Preparación de la Demo:</strong> Documentar y practicar la presentación del proyecto.</li><li><strong>Entregable de la Semana:</strong> La URL de la aplicación web funcional y la presentación final.</li></ul>`},
-                'vision_producto': { title: 'Visión del Producto y Modelo', content: `<h4 class="text-2xl font-bold text-white mb-3">1. El Producto Final: App Interactiva</h4><p class="mb-4">Visualizamos una aplicación web en <strong>Streamlit</strong>, limpia y profesional. Un usuario usará filtros en una barra lateral (región, edad, sexo) para explorar datos en un panel principal con 3 pestañas:</p><ul class="list-disc list-inside ml-4 space-y-2"><li><strong>Dashboard General:</strong> Un mapa interactivo de Perú y KPIs que reaccionan a los filtros.</li><li><strong>Simulador de Riesgo:</strong> El usuario define un perfil y el modelo predice las probabilidades de causa de muerte en un gráfico de barras.</li><li><strong>Explicabilidad (El "Porqué"):</strong> Un gráfico SHAP que muestra qué factores influyeron más en la predicción del simulador.</li></ul><h4 class="text-2xl font-bold text-white mt-6 mb-3">2. Arquitectura del Modelo</h4><p><strong>Entradas (Features):</strong> El modelo se alimentará de variables preprocesadas como:</p><ul class="list-disc list-inside ml-4"><li><code class='text-cyan-300'>EDAD_UNIFICADA</code> (Numérica)</li><li><code class='text-cyan-300'>SEXO</code>, <code class='text-cyan-300'>ESTADO_CIVIL</code> (Categóricas)</li><li><code class='text-cyan-300'>DEPARTAMENTO</code> (Geográfica)</li><li><code class='text-cyan-300'>TIPO_SEGURO</code> (Contextual)</li></ul><p class="mt-2"><strong>Salida (Target):</strong> El modelo predecirá un <strong>array de probabilidades</strong> para 5 categorías de muerte (ej. Cardiovasculares, Cáncer, Externas, etc.), que la app visualizará como un gráfico de barras.</p>`}
+                'vision_producto': { title: 'Visión del Producto y Modelo', content: `<h4 class="text-2xl font-bold text-white mb-3">1. El Producto Final: App Interactiva</h4><p class="mb-4">Visualizamos una aplicación web en <strong>Streamlit</strong>, limpia y profesional. Un usuario usará filtros en una barra lateral (región, edad, sexo) para explorar datos en un panel principal con 3 pestañas:</p><ul class="list-disc list-inside ml-4 space-y-2"><li><strong>Dashboard General:</strong> Un mapa interactivo de Perú y KPIs que reaccionan a los filtros.</li><li><strong>Simulador de Riesgo:</strong> El usuario define un perfil y el modelo predice las probabilidades de causa de muerte en un gráfico de barras.</li><li><strong>Explicabilidad (El "Porqué"):</strong> Un gráfico SHAP que muestra qué factores influyeron más en la predicción del simulador.</li></ul><h4 class="text-2xl font-bold text-white mt-6 mb-3">2. Arquitectura del Modelo</h4><p><strong>Entradas (Features):</strong> El modelo se alimentará de variables preprocesadas como:</p><ul class="list-disc list-inside ml-4"><li><code class='text-cyan-300'>EDAD_UNIFICADA</code> (Numérica)</li><li><code class='text-cyan-300'>SEXO</code>, <code class='text-cyan-300'>ESTADO_CIVIL</code> (Categóricas)</li><li><code class='text-cyan-300'>DEPARTAMENTO</code> (Geográfica)</li><li><code class='text-cyan-300'>TIPO_SEGURO</code> (Contextual)</li></ul><p class="mt-2"><strong>Salida (Target):</strong> El modelo predecirá un <strong>array de probabilidades</strong> para 5 categorías de muerte (ej. Cardiovasculares, Cáncer, Externas, etc.), que la app visualizará como un gráfico de barras.</p>`},
+                'aclaracion': {
+                    title: 'Aclaración Metodológica Clave',
+                    content: `
+                        <p class="mb-4">Una pregunta válida es: ¿Cómo podemos "predecir" la muerte con datos de personas ya fallecidas? La respuesta es que no lo hacemos. El enfoque es más sutil y poderoso.</p>
+                        <p class="mb-2">Nuestro modelo <strong>NO predice SI alguien va a morir</strong>.</p>
+                        <p>Es un <strong>Modelo de Clasificación</strong> que responde a una pregunta diferente:</p>
+                        <div class="highlight-box my-4"><p class="text-xl text-center font-bold text-white">"Dado el perfil de una persona viva, ¿cuál es su perfil de vulnerabilidad más probable?"</p></div>
+                        <p><strong>En la práctica:</strong></p>
+                        <ul class="list-disc list-inside ml-4 space-y-2">
+                             <li><strong>Entradas (Features):</strong> Usamos solo datos pre-mortem: <code class='text-cyan-300'>Edad</code>, <code class='text-cyan-300'>Sexo</code>, <code class='text-cyan-300'>Región</code>.</li>
+                             <li><strong>Salida (Target):</strong> El modelo clasifica el perfil en una de las <code class='text-cyan-300'>CATEGORÍAS DE MUERTE</code>, devolviendo un vector de probabilidades.</li>
+                        </ul>
+                        <p class="mt-4">Así, transformamos una predicción imposible en una clasificación estratégica y accionable para la salud pública.</p>
+                    `
+                }
             };
 
             window.showModal = (key) => {
