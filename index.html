@@ -18,18 +18,19 @@
             font-family: 'Poppins', sans-serif;
             background: #0a0c10;
             color: #c9d1d9;
-            overflow: hidden;
+            overflow: hidden; /* Prevents whole page from scrolling */
         }
 
         .slide {
             display: none;
             min-height: 100vh;
+            max-height: 100vh; /* Ensures slide doesn't exceed viewport height */
             width: 100%;
             display: flex;
             flex-direction: column;
-            justify-content: center;
+            justify-content: flex-start; /* Aligns content to top on mobile */
             align-items: center;
-            padding: 2rem;
+            padding: 4rem 1rem; /* More vertical padding */
             text-align: center;
             opacity: 0;
             transition: all 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
@@ -37,6 +38,16 @@
             top: 0;
             left: 0;
             transform: translateX(50px) scale(0.98);
+            overflow-y: auto; /* Allows individual slide to scroll if content overflows */
+            -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+        }
+
+        /* On larger screens, center the content vertically */
+        @media (min-width: 768px) {
+            .slide {
+                justify-content: center;
+                padding: 2rem;
+            }
         }
 
         .slide.active {
@@ -85,8 +96,8 @@
             color: white;
             border: 1px solid rgba(34, 211, 238, 0.3);
             border-radius: 50%;
-            width: 3.5rem;
-            height: 3.5rem;
+            width: 3rem;
+            height: 3rem;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -150,7 +161,7 @@
 
         .modal-content {
             margin: 5% auto;
-            padding: 2.5rem;
+            padding: 1.5rem;
             width: 90%;
             max-width: 800px;
             position: relative;
@@ -176,40 +187,39 @@
     <section id="slide-1" class="slide active">
         <div class="flex flex-col items-center gap-6">
             <div class="float-animation">
-                <h1 class="text-6xl md:text-8xl lg:text-9xl font-black uppercase tracking-wider text-white drop-shadow-2xl">SINADEF INSIGHT</h1>
+                <h1 class="text-5xl sm:text-6xl md:text-8xl lg:text-9xl font-black uppercase tracking-wider text-white drop-shadow-2xl">SINADEF INSIGHT</h1>
             </div>
-            <h3 class="text-2xl md:text-3xl lg:text-4xl font-light accent-text">Generando Inteligencia Accionable para la Salud Pública</h3>
+            <h3 class="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-light accent-text">Generando Inteligencia Accionable para la Salud Pública</h3>
             <div class="highlight-box mt-8 max-w-3xl">
-                <p class="text-lg md:text-xl text-gray-300">Equipo, propongo que abordemos un problema complejo que combina un gran reto técnico con un impacto social medible.</p>
+                <p class="text-base md:text-xl text-gray-300">Equipo, propongo que abordemos un problema complejo que combina un gran reto técnico con un impacto social medible.</p>
             </div>
             <p class="text-sm md:text-base text-gray-500 mt-4">Propuesta de Proyecto Final | Le Wagon LatAm</p>
         </div>
     </section>
 
-    <!-- Slide 2: The Problem (Enfoque de negocio) (CORREGIDO) -->
+    <!-- Slide 2: The Problem (Enfoque de negocio) -->
     <section id="slide-2" class="slide">
         <div class="w-full max-w-6xl mx-auto flex flex-col items-center justify-center gap-8">
-            <h2 class="text-5xl md:text-6xl font-bold text-white mb-2">El Desafío: Optimización de Recursos</h2>
-            <p class="text-2xl text-gray-400 mb-10">Un gestor de salud pública enfrenta un problema clásico de negocio: asignar recursos limitados bajo alta incertidumbre.</p>
+            <h2 class="text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-2">El Desafío: Optimización de Recursos</h2>
+            <p class="text-xl md:text-2xl text-gray-400 mb-10">Un gestor de salud pública enfrenta un problema clásico de negocio: asignar recursos limitados bajo alta incertidumbre.</p>
             
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8 w-full">
                 <div class="glass-card p-6 text-center">
-                    <h1 class="text-4xl md:text-5xl font-black accent-text">Datos Masivos</h1>
-                    <p class="text-lg text-gray-300 mt-2">1.1M de registros disponibles.</p>
+                    <h1 class="text-3xl sm:text-4xl font-black accent-text">Datos Masivos</h1>
+                    <p class="text-base md:text-lg text-gray-300 mt-2">1.1M de registros disponibles.</p>
                 </div>
                 <div class="glass-card p-6 text-center">
-                    <h1 class="text-4xl md:text-5xl font-black text-red-400">Incertidum-</h1>
-                    <h1 class="text-4xl md:text-5xl font-black text-red-400">bre</h1>
-                    <p class="text-lg text-gray-300 mt-2">Decisiones basadas en promedios e intuición.</p>
+                    <h1 class="text-3xl sm:text-4xl font-black text-red-400">Incertidumbre</h1>
+                    <p class="text-base md:text-lg text-gray-300 mt-2">Decisiones basadas en promedios e intuición.</p>
                 </div>
                 <div class="glass-card p-6 text-center">
-                    <h1 class="text-4xl md:text-5xl font-black text-yellow-400">Impacto Potencial</h1>
-                    <p class="text-lg text-gray-300 mt-2">Vidas y eficiencia en juego.</p>
+                    <h1 class="text-3xl sm:text-4xl font-black text-yellow-400">Impacto Potencial</h1>
+                    <p class="text-base md:text-lg text-gray-300 mt-2">Vidas y eficiencia en juego.</p>
                 </div>
             </div>
             
             <div class="highlight-box max-w-4xl mt-10">
-                <p class="text-2xl md:text-3xl text-gray-200 font-light">
+                <p class="text-xl md:text-2xl text-gray-200 font-light">
                     <span class="font-bold text-cyan-400">Nuestra Oportunidad:</span> Aplicar ciencia de datos para transformar datos crudos en una ventaja estratégica.
                 </p>
             </div>
@@ -219,37 +229,37 @@
     <!-- Slide 3: The 3-Pillar Solution (Tono técnico) -->
     <section id="slide-3" class="slide">
         <div class="w-full max-w-7xl mx-auto">
-            <h2 class="text-4xl md:text-6xl font-bold text-white mb-4">Nuestro Enfoque de 3 Pilares</h2>
-            <p class="text-xl text-gray-400 mb-12">Un análisis integral para obtener insights robustos y accionables.</p>
+            <h2 class="text-3xl sm:text-4xl md:text-6xl font-bold text-white mb-4">Nuestro Enfoque de 3 Pilares</h2>
+            <p class="text-lg md:text-xl text-gray-400 mb-12">Un análisis integral para obtener insights robustos y accionables.</p>
             
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
                 <!-- Pillar 1 -->
-                <div class="p-8 glass-card flex flex-col items-center gap-6 interactive-card hover:scale-105 transition-transform" onclick="showModal('pillar1')">
-                    <div class="w-20 h-20 accent-bg rounded-full flex items-center justify-center">
-                        <svg class="w-12 h-12 text-gray-900" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3v18h18"></path></svg>
+                <div class="p-6 md:p-8 glass-card flex flex-col items-center gap-4 interactive-card hover:scale-105 transition-transform" onclick="showModal('pillar1')">
+                    <div class="w-16 h-16 md:w-20 md:h-20 accent-bg rounded-full flex items-center justify-center">
+                        <svg class="w-10 h-10 md:w-12 md:h-12 text-gray-900" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3v18h18"></path></svg>
                     </div>
-                    <h3 class="text-2xl font-bold text-white">1. Diagnóstico Descriptivo</h3>
-                    <p class="text-lg text-gray-300 text-center">Entender el "qué" y el "cuándo" de las tendencias.</p>
+                    <h3 class="text-xl sm:text-2xl font-bold text-white">1. Diagnóstico Descriptivo</h3>
+                    <p class="text-base md:text-lg text-gray-300 text-center">Entender el "qué" y el "cuándo".</p>
                     <span class="text-cyan-400 text-sm mt-2 flex items-center gap-2">Ver detalles →</span>
                 </div>
                 
                 <!-- Pillar 2 -->
-                <div class="p-8 glass-card flex flex-col items-center gap-6 interactive-card hover:scale-105 transition-transform" onclick="showModal('pillar2')">
-                    <div class="w-20 h-20 accent-bg rounded-full flex items-center justify-center">
-                        <svg class="w-12 h-12 text-gray-900" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h.5A2.5 2.5 0 0020 5.5V3.935m-14 0A10.003 10.003 0 0112 2a10.003 10.003 0 017.945 1.935M5.228 16.95A10.003 10.003 0 0112 22a10.003 10.003 0 016.772-5.05m-13.544 0h13.544"></path></svg>
+                <div class="p-6 md:p-8 glass-card flex flex-col items-center gap-4 interactive-card hover:scale-105 transition-transform" onclick="showModal('pillar2')">
+                    <div class="w-16 h-16 md:w-20 md:h-20 accent-bg rounded-full flex items-center justify-center">
+                        <svg class="w-10 h-10 md:w-12 md:h-12 text-gray-900" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h.5A2.5 2.5 0 0020 5.5V3.935m-14 0A10.003 10.003 0 0112 2a10.003 10.003 0 017.945 1.935M5.228 16.95A10.003 10.003 0 0112 22a10.003 10.003 0 016.772-5.05m-13.544 0h13.544"></path></svg>
                     </div>
-                    <h3 class="text-2xl font-bold text-white">2. Análisis Contextual</h3>
-                    <p class="text-lg text-gray-300 text-center">Añadir "contexto real" con tasas de mortalidad.</p>
+                    <h3 class="text-xl sm:text-2xl font-bold text-white">2. Análisis Contextual</h3>
+                    <p class="text-base md:text-lg text-gray-300 text-center">Añadir "contexto real".</p>
                     <span class="text-cyan-400 text-sm mt-2 flex items-center gap-2">Ver detalles →</span>
                 </div>
                 
                 <!-- Pillar 3 -->
-                <div class="p-8 glass-card flex flex-col items-center gap-6 border-2 border-cyan-400 shadow-2xl shadow-cyan-500/30 interactive-card hover:scale-105 transition-transform" onclick="showModal('pillar3')">
-                    <div class="w-20 h-20 accent-bg rounded-full flex items-center justify-center pulse-animation">
-                       <svg class="w-12 h-12 text-gray-900" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path></svg>
+                <div class="p-6 md:p-8 glass-card flex flex-col items-center gap-4 border-2 border-cyan-400 shadow-2xl shadow-cyan-500/30 interactive-card hover:scale-105 transition-transform" onclick="showModal('pillar3')">
+                    <div class="w-16 h-16 md:w-20 md:h-20 accent-bg rounded-full flex items-center justify-center pulse-animation">
+                       <svg class="w-10 h-10 md:w-12 md:h-12 text-gray-900" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path></svg>
                     </div>
-                    <h3 class="text-2xl font-bold text-white">3. Inteligencia Predictiva</h3>
-                    <p class="text-lg text-gray-300 text-center">Revelar el "porqué profundo" de cada riesgo.</p>
+                    <h3 class="text-xl sm:text-2xl font-bold text-white">3. Inteligencia Predictiva</h3>
+                    <p class="text-base md:text-lg text-gray-300 text-center">Revelar el "porqué profundo".</p>
                     <span class="text-cyan-400 text-sm mt-2 flex items-center gap-2">Ver detalles →</span>
                 </div>
             </div>
@@ -259,37 +269,37 @@
     <!-- Slide 4: Skills -->
     <section id="slide-4" class="slide">
         <div class="w-full max-w-7xl mx-auto">
-            <h2 class="text-4xl md:text-5xl font-bold text-white mb-4">Nuestro Stack Técnico</h2>
-            <p class="text-xl text-gray-400 mb-12">Una oportunidad para dominar juntos el ciclo completo de un producto de datos.</p>
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
-                <div class="p-6 glass-card text-center"><h4 class="text-xl font-bold text-white mb-2">Data Engineering</h4><p class="text-cyan-400 text-sm">Pandas, NumPy</p></div>
-                <div class="p-6 glass-card text-center border-2 border-cyan-400"><h4 class="text-xl font-bold text-white mb-2">ML Predictivo</h4><p class="text-cyan-400 text-sm">Scikit-learn, XGBoost</p></div>
-                <div class="p-6 glass-card text-center"><h4 class="text-xl font-bold text-white mb-2">Explicabilidad (XAI)</h4><p class="text-cyan-400 text-sm">SHAP</p></div>
-                <div class="p-6 glass-card text-center"><h4 class="text-xl font-bold text-white mb-2">Despliegue</h4><p class="text-cyan-400 text-sm">Streamlit, Git/GitHub</p></div>
+            <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4">Nuestro Stack Técnico</h2>
+            <p class="text-lg md:text-xl text-gray-400 mb-12">Una oportunidad para dominar juntos el ciclo completo de un producto de datos.</p>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+                <div class="p-4 md:p-6 glass-card text-center"><h4 class="text-lg md:text-xl font-bold text-white mb-2">Data Engineering</h4><p class="text-cyan-400 text-sm">Pandas, NumPy</p></div>
+                <div class="p-4 md:p-6 glass-card text-center border-2 border-cyan-400"><h4 class="text-lg md:text-xl font-bold text-white mb-2">ML Predictivo</h4><p class="text-cyan-400 text-sm">Scikit-learn, XGBoost</p></div>
+                <div class="p-4 md:p-6 glass-card text-center"><h4 class="text-lg md:text-xl font-bold text-white mb-2">Explicabilidad (XAI)</h4><p class="text-cyan-400 text-sm">SHAP</p></div>
+                <div class="p-4 md:p-6 glass-card text-center"><h4 class="text-lg md:text-xl font-bold text-white mb-2">Despliegue</h4><p class="text-cyan-400 text-sm">Streamlit, Git/GitHub</p></div>
             </div>
-            <div class="highlight-box mt-16 max-w-4xl mx-auto"><p class="text-2xl md:text-3xl font-bold text-white">Al final, no tendremos solo un análisis. Tendremos un <span class="accent-text">producto de datos de punta a punta.</span></p></div>
+            <div class="highlight-box mt-12 md:mt-16 max-w-4xl mx-auto"><p class="text-xl md:text-2xl font-bold text-white">Al final, no tendremos solo un análisis. Tendremos un <span class="accent-text">producto de datos de punta a punta.</span></p></div>
         </div>
     </section>
 
     <!-- Slide 5: Strategic Value (REVISED) -->
     <section id="slide-5" class="slide">
         <div class="w-full max-w-7xl mx-auto">
-            <h2 class="text-4xl md:text-5xl font-bold text-white mb-8">De un Problema Técnico a una Solución Estratégica</h2>
-            <p class="text-xl text-gray-400 mb-12">Este proyecto nos permite demostrar un nivel superior de pensamiento analítico.</p>
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+            <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-8">De un Problema Técnico a una Solución Estratégica</h2>
+            <p class="text-lg md:text-xl text-gray-400 mb-12">Este proyecto nos permite demostrar un nivel superior de pensamiento analítico.</p>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12">
                 <!-- Standard Project -->
-                <div class="p-8 rounded-2xl bg-gray-800/50 flex flex-col justify-center items-center h-full border-2 border-gray-600">
-                    <div class="text-gray-500 mb-6"><svg class="w-20 h-20 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 0l-3-3m3 3l-3 3M6 17h12M6 12h12M6 7h12"></path></svg></div>
-                    <h3 class="text-2xl font-bold text-gray-400 mb-4">Un Problema Técnico Contenido</h3>
-                    <p class="text-lg text-gray-400">Responde a una pregunta aislada: ¿Cuál es el precio? ¿Es fraude o no?</p>
+                <div class="p-6 md:p-8 rounded-2xl bg-gray-800/50 flex flex-col justify-center items-center h-full border-2 border-gray-600">
+                    <div class="text-gray-500 mb-6"><svg class="w-16 h-16 md:w-20 md:h-20 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 0l-3-3m3 3l-3 3M6 17h12M6 12h12M6 7h12"></path></svg></div>
+                    <h3 class="text-xl md:text-2xl font-bold text-gray-400 mb-4">Un Problema Técnico Contenido</h3>
+                    <p class="text-base md:text-lg text-gray-400">Responde a una pregunta aislada: ¿Cuál es el precio? ¿Es fraude o no?</p>
                     <p class="text-gray-500 mt-4 italic">Demuestra una habilidad específica.</p>
                 </div>
                 <!-- Our Project -->
-                <div class="p-8 rounded-2xl accent-bg flex flex-col justify-center items-center h-full shadow-2xl shadow-cyan-500/50 border-2 border-cyan-300">
-                    <div class="text-gray-900 mb-6"><svg class="w-20 h-20 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-12v4m-2-2h4m5 6v4m-2-2h4M12 3v1m0 16v1m4.657-4.657l-1.414-1.414M6.757 17.243L5.343 15.828M17.243 8.243L15.828 6.828M8.243 6.828L6.828 5.343"></path></svg></div>
-                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Una Solución Estratégica Completa</h3>
-                    <p class="text-lg text-gray-900">Responde a un desafío complejo: ¿Dónde y cómo se deben asignar recursos para máximo impacto?</p>
-                    <div class="text-gray-800 mt-4 space-y-1">
+                <div class="p-6 md:p-8 rounded-2xl accent-bg flex flex-col justify-center items-center h-full shadow-2xl shadow-cyan-500/50 border-2 border-cyan-300">
+                    <div class="text-gray-900 mb-6"><svg class="w-16 h-16 md:w-20 md:h-20 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-12v4m-2-2h4m5 6v4m-2-2h4M12 3v1m0 16v1m4.657-4.657l-1.414-1.414M6.757 17.243L5.343 15.828M17.243 8.243L15.828 6.828M8.243 6.828L6.828 5.343"></path></svg></div>
+                    <h3 class="text-xl md:text-2xl font-bold text-gray-900 mb-4">Una Solución Estratégica Completa</h3>
+                    <p class="text-base md:text-lg text-gray-900">Responde a un desafío complejo: ¿Dónde y cómo se deben asignar recursos para máximo impacto?</p>
+                    <div class="text-gray-800 mt-4 space-y-1 text-sm md:text-base">
                         <p>✓ Análisis Sistémico</p>
                         <p>✓ Enriquecimiento de Datos</p>
                         <p>✓ Modelo Explicable (XAI)</p>
@@ -303,13 +313,13 @@
     <!-- Slide 6: The Plan -->
     <section id="slide-6" class="slide">
         <div class="w-full max-w-4xl mx-auto">
-             <h2 class="text-4xl md:text-5xl font-bold text-white mb-4">Nuestra Hoja de Ruta Propuesta</h2>
-             <p class="text-xl text-gray-400 mb-12">Un plan ambicioso, pero flexible. Nuestra prioridad: un <strong>Producto Mínimo Viable (MVP)</strong> funcional en 4 semanas.</p>
+             <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4">Nuestra Hoja de Ruta Propuesta</h2>
+             <p class="text-lg md:text-xl text-gray-400 mb-12">Un plan ambicioso, pero flexible. Nuestra prioridad: un <strong>Producto Mínimo Viable (MVP)</strong> funcional en 4 semanas.</p>
              <div class="space-y-4 w-full">
-                <div class="flex items-center gap-4 p-4 glass-card interactive-card" onclick="showModal('semana1')"><span class="flex-shrink-0 flex items-center justify-center w-24 h-12 rounded-md accent-bg text-gray-900 font-bold text-xl">Sem 1</span><div class="text-left"><h4 class="text-xl font-bold text-white">Ingeniería de Datos</h4><p class="text-gray-400">Limpieza y categorización de 1.1M de registros.</p></div><span class="ml-auto text-cyan-400 text-2xl">→</span></div>
-                <div class="flex items-center gap-4 p-4 glass-card interactive-card" onclick="showModal('semana2')"><span class="flex-shrink-0 flex items-center justify-center w-24 h-12 rounded-md accent-bg text-gray-900 font-bold text-xl">Sem 2</span><div class="text-left"><h4 class="text-xl font-bold text-white">Análisis y Enriquecimiento</h4><p class="text-gray-400">EDA, cruce con datos del INEI y visualizaciones.</p></div><span class="ml-auto text-cyan-400 text-2xl">→</span></div>
-                <div class="flex items-center gap-4 p-4 glass-card interactive-card" onclick="showModal('semana3')"><span class="flex-shrink-0 flex items-center justify-center w-24 h-12 rounded-md accent-bg text-gray-900 font-bold text-xl">Sem 3</span><div class="text-left"><h4 class="text-xl font-bold text-white">Modelado Predictivo</h4><p class="text-gray-400">Entrenar modelo de riesgo con XGBoost y SHAP.</p></div><span class="ml-auto text-cyan-400 text-2xl">→</span></div>
-                <div class="flex items-center gap-4 p-4 glass-card interactive-card" onclick="showModal('semana4')"><span class="flex-shrink-0 flex items-center justify-center w-24 h-12 rounded-md accent-bg text-gray-900 font-bold text-xl">Sem 4</span><div class="text-left"><h4 class="text-xl font-bold text-white">App y Despliegue</h4><p class="text-gray-400">Construir el MVP en Streamlit y preparar la demo.</p></div><span class="ml-auto text-cyan-400 text-2xl">→</span></div>
+                <div class="flex items-center gap-4 p-4 glass-card interactive-card" onclick="showModal('semana1')"><span class="flex-shrink-0 flex items-center justify-center w-24 h-12 rounded-md accent-bg text-gray-900 font-bold text-xl">Sem 1</span><div class="text-left"><h4 class="text-lg md:text-xl font-bold text-white">Ingeniería de Datos</h4><p class="text-sm md:text-base text-gray-400">Limpieza y categorización.</p></div><span class="ml-auto text-cyan-400 text-2xl">→</span></div>
+                <div class="flex items-center gap-4 p-4 glass-card interactive-card" onclick="showModal('semana2')"><span class="flex-shrink-0 flex items-center justify-center w-24 h-12 rounded-md accent-bg text-gray-900 font-bold text-xl">Sem 2</span><div class="text-left"><h4 class="text-lg md:text-xl font-bold text-white">Análisis y Enriquecimiento</h4><p class="text-sm md:text-base text-gray-400">EDA y cruce con datos INEI.</p></div><span class="ml-auto text-cyan-400 text-2xl">→</span></div>
+                <div class="flex items-center gap-4 p-4 glass-card interactive-card" onclick="showModal('semana3')"><span class="flex-shrink-0 flex items-center justify-center w-24 h-12 rounded-md accent-bg text-gray-900 font-bold text-xl">Sem 3</span><div class="text-left"><h4 class="text-lg md:text-xl font-bold text-white">Modelado Predictivo</h4><p class="text-sm md:text-base text-gray-400">Entrenamiento con XGBoost y SHAP.</p></div><span class="ml-auto text-cyan-400 text-2xl">→</span></div>
+                <div class="flex items-center gap-4 p-4 glass-card interactive-card" onclick="showModal('semana4')"><span class="flex-shrink-0 flex items-center justify-center w-24 h-12 rounded-md accent-bg text-gray-900 font-bold text-xl">Sem 4</span><div class="text-left"><h4 class="text-lg md:text-xl font-bold text-white">App y Despliegue</h4><p class="text-sm md:text-base text-gray-400">Construir MVP y preparar demo.</p></div><span class="ml-auto text-cyan-400 text-2xl">→</span></div>
              </div>
              <div class="mt-12">
                 <button class="accent-bg text-gray-900 font-bold py-3 px-8 rounded-lg hover:scale-105 transition-transform shadow-lg shadow-cyan-500/20 flex items-center justify-center gap-2 mx-auto" onclick="showModal('vision_producto')">
@@ -323,21 +333,21 @@
     <!-- Slide 7: Call to Action (Tono modificado) -->
     <section id="slide-7" class="slide">
         <div class="text-center max-w-6xl mx-auto">
-            <h1 class="text-5xl md:text-7xl lg:text-8xl font-black uppercase text-white leading-tight mb-8">Una Misión Conjunta</h1>
-            <p class="text-2xl md:text-4xl font-light text-gray-300 mb-16">Este es un proyecto ambicioso, y por eso mismo creo que es perfecto para el increíble talento que tenemos en este equipo.</p>
+            <h1 class="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-black uppercase text-white leading-tight mb-8">Una Misión Conjunta</h1>
+            <p class="text-xl md:text-2xl font-light text-gray-300 mb-12">Este es un proyecto ambicioso, y por eso mismo creo que es perfecto para el increíble talento que tenemos en este equipo.</p>
             <div class="highlight-box max-w-3xl mx-auto">
-                 <p class="text-2xl md:text-4xl text-white font-bold">Me encantaría <span class="accent-text pulse-animation">construir esto con ustedes.</span></p>
+                 <p class="text-xl md:text-3xl text-white font-bold">Me encantaría <span class="accent-text pulse-animation">construir esto con ustedes.</span></p>
             </div>
-             <p class="text-lg text-gray-500 mt-16">Mi tesis de grado se centra en este tema. No es una idea improvisada; es un área que me apasiona y en la que me gustaría que colaboremos.</p>
+             <p class="text-base md:text-lg text-gray-500 mt-12">Mi tesis de grado se centra en este tema. No es una idea improvisada; es un área que me apasiona y en la que me gustaría que colaboremos.</p>
         </div>
     </section>
 
     <!-- Slide 8: Thanks (Tono modificado) -->
     <section id="slide-8" class="slide">
          <div class="flex flex-col items-center gap-8">
-            <h2 class="text-6xl md:text-8xl font-bold text-white float-animation">¡Gracias!</h2>
-            <h3 class="text-4xl md:text-5xl font-light accent-text">SINADEF INSIGHT</h3>
-            <p class="text-3xl text-gray-200 mt-8">¿Qué opinan? Me encantaría escuchar sus ideas.</p>
+            <h2 class="text-5xl sm:text-6xl md:text-8xl font-bold text-white float-animation">¡Gracias!</h2>
+            <h3 class="text-3xl sm:text-4xl md:text-5xl font-light accent-text">SINADEF INSIGHT</h3>
+            <p class="text-2xl md:text-3xl text-gray-200 mt-8">¿Qué opinan? Me encantaría escuchar sus ideas.</p>
          </div>
     </section>
 
@@ -422,4 +432,3 @@
     </script>
 </body>
 </html>
-
