@@ -1,4 +1,4 @@
-# presentacion-sinadef
+# presentacion-sinadef: https://jhonwilber123.github.io/presentacion-sinadef/
 Propuesta de Proyecto Final Le Wagon (Batch 1959 Online)
 Título del Proyecto: plataforma Interactiva para el Análisis Predictivo de Riesgos de Mortalidad en Perú.**
 Equipo: 4 personas (Jhon Wilber Ajata Ascarrunz y 3 compañeros)
